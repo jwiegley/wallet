@@ -1,0 +1,47 @@
+#+TITLE: Internet Computer Protocol (ICP) Tokens
+
+* Creating a self-custody account
+
+#+begin_src sh
+# On air-gapped machine:
+keysmith generate -o seed.txt
+keysmith private-key -o private.pem
+keysmith account -i 0
+
+ACCOUNT=<account displayed above>
+
+# On connected machine:
+# Transfer tokens to the $ACCOUNT
+
+# Confirm the transfer by checking the account balance:
+dfx ledger --network=https://ic0.app balance $ACCOUNT
+#+end_src
+
+* Using quill to stake and manage neurons
+
+#+begin_src sh
+AMOUNT=100000 # Amount of tokens to be staked
+
+# On air-gapped machine:
+quill --pem-file private.pem neuron-stake \
+    --amount $AMOUNT --name 1 > ~/dl/stake.txt
+# On connected machine:
+quill send ~/dl/stake.txt
+
+NEURON=<neuron-id from the last output, without underscores>
+DELAY=252460800    # 8 years; halve this for 4 years
+
+# On air-gapped machine:
+quill --pem-file private.pem neuron-manage $NEURON \
+    --additional-dissolve-delay-seconds $DELAY > ~/dl/lock.txt
+# On connected machine:
+quill send ~/dl/lock.txt
+
+PRINCIPAL=<Principal Id shown in the Neuron tab of the NNS App>
+
+# On air-gapped machine:
+quill --pem-file private.pem neuron-manage $NEURON \
+    --add-hot-key $PRINCIPAL > ~/dl/add-hot-key.txt
+# On connected machine:
+quill send ~/dl/add-hot-key.txt
+#+end_src
