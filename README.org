@@ -1,5 +1,14 @@
 #+TITLE: Internet Computer Protocol (ICP) Tokens
 
+If you have Nix installed, you can use =nix-shell= to enter a shell where
+=keysmith=, =quill= and =dfx= are available. Be sure to do this before turning off
+all communications (wifi, bluetooth and Ethernet) if you are using the same
+machine to run air-gapped commands.
+
+However, do be aware that your machine may have spyware on it, there have even
+been reported cases of stealthy code that monitors the clipboard, and swaps
+out things it recognizes as crypto addresses with its own addresses.
+
 * Creating a self-custody account
 
 #+begin_src sh
@@ -14,6 +23,12 @@ ACCOUNT=<account displayed above>
 # Transfer tokens to the $ACCOUNT
 
 # Confirm the transfer by checking the account balance:
+dfx ledger --network=https://ic0.app balance $ACCOUNT
+#+end_src
+
+* Checking the balance of an account
+
+#+begin_src sh
 dfx ledger --network=https://ic0.app balance $ACCOUNT
 #+end_src
 
