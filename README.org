@@ -20,7 +20,10 @@ keysmith account -i 0
 ACCOUNT=<account displayed above>
 
 # On connected machine:
-# Transfer tokens to the $ACCOUNT
+# Transfer tokens to the $ACCOUNT. Note that this is usually done at Coinbase
+# or your exchange. I don't give a command here, but I can't presume where
+# your non-self-custodied tokens might becoming from, and I don't want to
+# offer a command that isn't appropriate for your circumstances.
 
 # Confirm the transfer by checking the account balance:
 dfx ledger --network=https://ic0.app balance $ACCOUNT
