@@ -37,14 +37,14 @@ keysmith = pkgs.stdenv.mkDerivation rec {
 
 quill = with pkgs; rustPlatform.buildRustPackage rec {
   name = "quill-${version}";
-  version = "0baa53c175";
+  version = "fb4cc8ce";
 
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "quill";
-    rev = "0baa53c175a831c0ad1a8c29b2dc0f437d105530";
-    sha256 = "1igggarq4kyln8hzsbpamz5q2hgh5d3bfkm8vfmafh013x4h55bf";
-    # date = 2021-06-18T08:16:07+02:00;
+    rev = "fb4cc8ce075a68f29775111c5210fb91c360201b";
+    sha256 = "02ga2xkdxs36mfr4lv43cy6wkf27c28bdkzfkp3az5jvyk17mkfr";
+    # date = 2021-07-07T16:11:07+02:00;
   };
 
   ic = fetchFromGitHub {
@@ -63,7 +63,7 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export IC_NNS_COMMON_PROTO_INCLUDES=${ic}/rs/nns/common/proto
   '';
 
-  cargoSha256 = "0h756lkvyqwsw3984dm0ys6qrdl22isg2zh2mmzqyw8220fgdzph";
+  cargoSha256 = "1l8vggynj0a3cdmmzgcy1m5af9xkm5b51jj27ghrknm412325zx5";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -74,12 +74,12 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
 
 dfx = pkgs.stdenv.mkDerivation rec {
   name = "dfx-${version}";
-  version = "0.7.2";
+  version = "0.7.5";
 
   src = pkgs.fetchurl {
     url = "https://sdk.dfinity.org/install.sh";
-    sha256 = "029lx3blylnkn1n6md8f00qxswhb17xv851dmsnybjq2z6g8jc8i";
-    # date = 2021-06-20T22:37:13-0700;
+    sha256 = "0y3x6lbqi5q2ybsj87h18lrwqdikwcz3irmb2lcc441aiy22hkj7";
+    # date = 2021-07-08T18:07:03-0700;
   };
 
   buildInputs = with pkgs; [ curl cacert ];
