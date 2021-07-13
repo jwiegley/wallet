@@ -61,6 +61,7 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export IC_PROTOBUF_PROTO_INCLUDES=${ic}/rs/protobuf/def
     export IC_NNS_COMMON_PROTO_INCLUDES=${ic}/rs/nns/common/proto
 
+    export PROTOC=${protobuf}/bin/protoc
     export OPENSSL_DIR=${openssl.dev}
     export OPENSSL_LIB_DIR=${openssl.out}/lib
   '';
