@@ -10,11 +10,11 @@
 
 rec {
 
-keysmith = pkgs.stdenv.mkDerivation rec {
-  name = "keysmith-${version}";
-  version = "0.0.0-unknown";
+keysmith = with pkgs; buildGoModule rec {
+  pname = "keysmith";
+  version = "3e2de90b";
 
-  src = pkgs.fetchFromGitHub {
+  src = fetchFromGitHub {
     owner = "dfinity";
     repo = "keysmith";
     rev = "3e2de90bc268392b3000b45c307bf6a123ad04c0";
@@ -22,17 +22,16 @@ keysmith = pkgs.stdenv.mkDerivation rec {
     # date = 2021-07-02T02:56:38+02:00;
   };
 
-  buildInputs = with pkgs; [ gnumake go git ];
+  vendorSha256 = "1p0r15ihmnmrybf12cycbav80sdj2dv2kry66f4hjfjn6k8zb0dc";
+  runVend = false;
 
-  buildPhase = ''
-    export HOME=$PWD
-    go build
-  '';
-
-  installPhase = ''
-    mkdir -p $out/bin
-    mv keysmith $out/bin
-  '';
+  meta = with lib; {
+    description = "Hierarchical Deterministic Key Derivation for the Internet Computer";
+    homepage = "https://github.com/dfinity/keysmith";
+    license = licenses.mit;
+    maintainers = with maintainers; [ imalison ];
+    platforms = platforms.all;
+  };
 };
 
 quill = with pkgs; rustPlatform.buildRustPackage rec {
