@@ -17,9 +17,9 @@ keysmith = pkgs.stdenv.mkDerivation rec {
   src = pkgs.fetchFromGitHub {
     owner = "dfinity";
     repo = "keysmith";
-    rev = "166664ba7fb0c843c5441e3b0bac17580ccdc8ae";
-    sha256 = "0fvpx18lys1qyrxbwyj04rdf6ikxvmlbl8jawbxnmkbh2wq63n8q";
-    # date = 2021-06-14T19:32:48+02:00;
+    rev = "3e2de90bc268392b3000b45c307bf6a123ad04c0";
+    sha256 = "1z0sxirk71yabgilq8v5lz4nd2bbm1xyrd5zppif8k9jqhr6v3v3";
+    # date = 2021-07-02T02:56:38+02:00;
   };
 
   buildInputs = with pkgs; [ gnumake go git ];
@@ -37,14 +37,14 @@ keysmith = pkgs.stdenv.mkDerivation rec {
 
 quill = with pkgs; rustPlatform.buildRustPackage rec {
   name = "quill-${version}";
-  version = "fb4cc8ce";
+  version = "d88d72bc";
 
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "quill";
-    rev = "fb4cc8ce075a68f29775111c5210fb91c360201b";
-    sha256 = "02ga2xkdxs36mfr4lv43cy6wkf27c28bdkzfkp3az5jvyk17mkfr";
-    # date = 2021-07-07T16:11:07+02:00;
+    rev = "d88d72bc929be6e0e9f3e55553dd5b9d0dbfcc82";
+    sha256 = "0ivv2b2z58hl1cdw0v54p49gfaam17ylvnxpd8f4wcqglyxgjsz6";
+    # date = 2021-07-12T14:35:41-07:00;
   };
 
   ic = fetchFromGitHub {
@@ -63,7 +63,7 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export IC_NNS_COMMON_PROTO_INCLUDES=${ic}/rs/nns/common/proto
   '';
 
-  cargoSha256 = "1l8vggynj0a3cdmmzgcy1m5af9xkm5b51jj27ghrknm412325zx5";
+  cargoSha256 = "0k029wf79x6wkfzmkcsmpk7r5jm2vax94mnnyr69q6b33zwm8v5s";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -74,12 +74,12 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
 
 dfx = pkgs.stdenv.mkDerivation rec {
   name = "dfx-${version}";
-  version = "0.7.5";
+  version = "0.7.6";
 
   src = pkgs.fetchurl {
     url = "https://sdk.dfinity.org/install.sh";
-    sha256 = "0y3x6lbqi5q2ybsj87h18lrwqdikwcz3irmb2lcc441aiy22hkj7";
-    # date = 2021-07-08T18:07:03-0700;
+    sha256 = "0m0s6ych8mzcbbbhn0bvrah5vha7i7lxw23ijf2m8q090hjpdbp3";
+    # date = 2021-07-12T18:19:03-0700;
   };
 
   buildInputs = with pkgs; [ curl cacert ];
