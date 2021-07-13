@@ -60,6 +60,8 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export IC_BASE_TYPES_PROTO_INCLUDES=${ic}/rs/types/base_types/proto
     export IC_PROTOBUF_PROTO_INCLUDES=${ic}/rs/protobuf/def
     export IC_NNS_COMMON_PROTO_INCLUDES=${ic}/rs/nns/common/proto
+
+    export OPENSSL_DIR=${openssl.dev}
   '';
 
   cargoSha256 = "0k029wf79x6wkfzmkcsmpk7r5jm2vax94mnnyr69q6b33zwm8v5s";
