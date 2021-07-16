@@ -75,14 +75,48 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
        ];
 };
 
+candid = with pkgs; rustPlatform.buildRustPackage rec {
+  name = "candid-${version}";
+  version = "21735b9c";
+
+  src = fetchFromGitHub {
+    owner = "dfinity";
+    repo = "candid";
+    rev = "21735b9cb824f1a4049e5be9c16feedff5c19f05";
+    sha256 = "1fsadfxgm5bpy73djw31hackzqvkinf860wvm6ncblr83521ac0j";
+    # date = 2021-07-07T14:06:28-07:00;
+  };
+
+  registry = "file://local-registry";
+
+  # preBuild = ''
+  #   export REGISTRY_TRANSPORT_PROTO_INCLUDES=${ic}/rs/registry/transport/proto
+  #   export IC_BASE_TYPES_PROTO_INCLUDES=${ic}/rs/types/base_types/proto
+  #   export IC_PROTOBUF_PROTO_INCLUDES=${ic}/rs/protobuf/def
+  #   export IC_NNS_COMMON_PROTO_INCLUDES=${ic}/rs/nns/common/proto
+
+  #   export PROTOC=${protobuf}/bin/protoc
+  #   export OPENSSL_DIR=${openssl.dev}
+  #   export OPENSSL_LIB_DIR=${openssl.out}/lib
+  # '';
+
+  cargoSha256 = "08badqjg8r3yjwgpbxy7rjr53v9gmx7jwblwf5a60lngpki696g6";
+
+  nativeBuildInputs = [ pkg-config ];
+  buildInputs = [ openssl protobuf ]
+    ++ lib.optionals stdenv.isDarwin [
+         libiconv darwin.apple_sdk.frameworks.Security
+       ];
+};
+
 dfx = pkgs.stdenv.mkDerivation rec {
   name = "dfx-${version}";
-  version = "0.7.6";
+  version = "0.7.7";
 
   src = pkgs.fetchurl {
     url = "https://sdk.dfinity.org/install.sh";
-    sha256 = "0m0s6ych8mzcbbbhn0bvrah5vha7i7lxw23ijf2m8q090hjpdbp3";
-    # date = 2021-07-12T18:19:03-0700;
+    sha256 = "08wf14hj61w5x0vv8h6yg3fkfqm18mds303gfrb22192lajkxwy0";
+    # date = 2021-07-13T18:01:32-0700;
   };
 
   buildInputs = with pkgs; [ curl cacert ];
@@ -100,7 +134,7 @@ dfx = pkgs.stdenv.mkDerivation rec {
 };
 
 shell = pkgs.mkShell {
-  buildInputs = [ keysmith quill dfx ];
+  buildInputs = [ keysmith quill candid dfx ];
 };
 
 }
