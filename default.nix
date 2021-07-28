@@ -36,14 +36,14 @@ keysmith = with pkgs; buildGoModule rec {
 
 quill = with pkgs; rustPlatform.buildRustPackage rec {
   name = "quill-${version}";
-  version = "d88d72bc";
+  version = "76dac5dd";
 
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "quill";
-    rev = "d88d72bc929be6e0e9f3e55553dd5b9d0dbfcc82";
-    sha256 = "0ivv2b2z58hl1cdw0v54p49gfaam17ylvnxpd8f4wcqglyxgjsz6";
-    # date = 2021-07-12T14:35:41-07:00;
+    rev = "76dac5ddb34f64aab3538ba3b5fa77b38a80ad3d";
+    sha256 = "0kyp2ji77a9faii9721k8972py0ac7p4ppqlklz5cikrxcyr6iab";
+    # date = 2021-07-14T08:44:25-07:00;
   };
 
   ic = fetchFromGitHub {
@@ -66,7 +66,7 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export OPENSSL_LIB_DIR=${openssl.out}/lib
   '';
 
-  cargoSha256 = "0k029wf79x6wkfzmkcsmpk7r5jm2vax94mnnyr69q6b33zwm8v5s";
+  cargoSha256 = "0clniq3whpcg3yx5kb2m81sbnng5z8337ahknz9cmh6qqqi3q3lf";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -82,9 +82,9 @@ candid = with pkgs; rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "candid";
-    rev = "21735b9cb824f1a4049e5be9c16feedff5c19f05";
-    sha256 = "1fsadfxgm5bpy73djw31hackzqvkinf860wvm6ncblr83521ac0j";
-    # date = 2021-07-07T14:06:28-07:00;
+    rev = "0bbb320e66fddeccb674128640d1a3e6f697386a";
+    sha256 = "1i61dkzzw6c1g8ab09cpl5p3i4fkbd39zb87za7cqllyfi3iw0pm";
+    # date = 2021-07-27T14:05:09-07:00;
   };
 
   registry = "file://local-registry";
@@ -100,7 +100,7 @@ candid = with pkgs; rustPlatform.buildRustPackage rec {
   #   export OPENSSL_LIB_DIR=${openssl.out}/lib
   # '';
 
-  cargoSha256 = "08badqjg8r3yjwgpbxy7rjr53v9gmx7jwblwf5a60lngpki696g6";
+  cargoSha256 = "1vbix102q8ajfb1driai24in2yc3mcrhipkrhjm0yfd2y7m1g5am";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -111,12 +111,12 @@ candid = with pkgs; rustPlatform.buildRustPackage rec {
 
 dfx = pkgs.stdenv.mkDerivation rec {
   name = "dfx-${version}";
-  version = "0.7.7";
+  version = "0.8.0";
 
   src = pkgs.fetchurl {
     url = "https://sdk.dfinity.org/install.sh";
-    sha256 = "08wf14hj61w5x0vv8h6yg3fkfqm18mds303gfrb22192lajkxwy0";
-    # date = 2021-07-13T18:01:32-0700;
+    sha256 = "0dqmv1rng3b8jf2gawdhqzl9h9am84kj6d52iyykyn2wzq8h12dg";
+    # date = 2021-07-28T08:48:30-0700;
   };
 
   buildInputs = with pkgs; [ curl cacert ];
