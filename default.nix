@@ -36,15 +36,16 @@ keysmith = with pkgs; buildGoModule rec {
 
 quill = with pkgs; rustPlatform.buildRustPackage rec {
   name = "quill-${version}";
-  version = "7b2222eb";
+  version = "f919b7c3";
 
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "quill";
-    rev = "7b2222ebd32d1d4b4b9e67afb3c20849cb8f783b";
-    sha256 = "1lmh0s6qsjj2fn82k34bnyfz7y4w7fkvi1v00v8a9js9v60ma7md";
-    # date = 2021-08-23T20:32:01+02:00;
+    rev = "f919b7c311f292a08797cc5bb172dd32fa77c925";
+    sha256 = "11lsvv2hd35n87ghdjvy4q9r12mhh1x3vjm7sbhn48lhr9gx9rq6";
+    # date = 2021-09-21T09:09:01-06:00;
   };
+  # src = ~/dfinity/master/rs/quill;
 
   ic = fetchFromGitHub {
     owner = "dfinity";
@@ -66,7 +67,7 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export OPENSSL_LIB_DIR=${openssl.out}/lib
   '';
 
-  cargoSha256 = "0kp6niij4qync4s82f56c5njh1jszk2n6b462pljkvgig44nk4k5";
+  cargoSha256 = "0mjz9yz6388d6rcmzfw11xb1ilsxxpsw35indnlnfr730v7m77zi";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -77,19 +78,19 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
 
 candid = with pkgs; rustPlatform.buildRustPackage rec {
   name = "candid-${version}";
-  version = "21735b9c";
+  version = "e0e3c02b";
 
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "candid";
-    rev = "67e1e605aa772980560562b1d1b1af4b4afa02b2";
-    sha256 = "0y9d0ipy2w5a5nh4ynkmx1clqzg5vaq1zn21h05f4sf0b5yh2gj2";
-    # date = 2021-08-20T11:07:23-07:00;
+    rev = "e0e3c02bbd613fb44db2ca8f142eaa14ec33ef6f";
+    sha256 = "1nrawygmxkpkqqj1q8ffqx3c6999yvlp0jx4sw7ld6j7a9brn2h8";
+    # date = 2021-09-14T07:24:46-07:00;
   };
 
   registry = "file://local-registry";
 
-  cargoSha256 = "1inz1y1w3sbcvi7vjyapv2l9ag1wpvh2l2y5alfg59d9ff6k6gkp";
+  cargoSha256 = "0l6dnqh02dfi1m4mwn3v5qwr8z33i0fvm9dccbyjsygal7f3zz8y";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -123,12 +124,12 @@ idl2json = with pkgs; rustPlatform.buildRustPackage rec {
 
 dfx = pkgs.stdenv.mkDerivation rec {
   name = "dfx-${version}";
-  version = "0.8.0";
+  version = "0.8.1";
 
   src = pkgs.fetchurl {
     url = "https://sdk.dfinity.org/install.sh";
-    sha256 = "1314krfh8drnm1j331glx8pkm81jgln278d5ngr0825ahqkzwy5y";
-    # date = 2021-07-30T22:18:57-0700;
+    sha256 = "136zfz52f8h9amia9gfw14sp7p72wgxzv1q2r5cmy1vmsa48rp3w";
+    # date = 2021-09-21T08:57:51-0600;
   };
 
   buildInputs = with pkgs; [ curl cacert ];
