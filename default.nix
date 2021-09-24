@@ -38,14 +38,14 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
   name = "quill-${version}";
   version = "f1672a79";
 
-  src = fetchFromGitHub {
-    owner = "dfinity";
-    repo = "quill";
-    rev = "f1672a79b483ba09f553d544eff22e829dbf57f4";
-    sha256 = "1vfl3c54kz9nri8a5fn32v4sjaql4p9nnb1dgjjk4i3i384nrsfw";
-    # date = 2021-09-22T19:45:34+02:00;
-  };
-  # src = ~/dfinity/master/rs/quill;
+  # src = fetchFromGitHub {
+  #   owner = "dfinity";
+  #   repo = "quill";
+  #   rev = "f1672a79b483ba09f553d544eff22e829dbf57f4";
+  #   sha256 = "1vfl3c54kz9nri8a5fn32v4sjaql4p9nnb1dgjjk4i3i384nrsfw";
+  #   # date = 2021-09-22T19:45:34+02:00;
+  # };
+  src = ~/dfinity/master/rs/quill;
 
   ic = fetchFromGitHub {
     owner = "dfinity";
@@ -67,7 +67,7 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export OPENSSL_LIB_DIR=${openssl.out}/lib
   '';
 
-  cargoSha256 = "0jzc3iv1sj8rfyl6a549lhnwc0d65cqgzf69pn362gij2fbsnyks";
+  cargoSha256 = "14cflwmf0m17c5ss04v1yq1hiill9gi3qgla5qy44l6sflmhz2i3";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -122,32 +122,8 @@ idl2json = with pkgs; rustPlatform.buildRustPackage rec {
        ];
 };
 
-dfx = pkgs.stdenv.mkDerivation rec {
-  name = "dfx-${version}";
-  version = "0.8.1";
-
-  src = pkgs.fetchurl {
-    url = "https://sdk.dfinity.org/install.sh";
-    sha256 = "136zfz52f8h9amia9gfw14sp7p72wgxzv1q2r5cmy1vmsa48rp3w";
-    # date = 2021-09-21T08:57:51-0600;
-  };
-
-  buildInputs = with pkgs; [ curl cacert ];
-
-  phases = [ "fixupPhase" "installPhase" ];
-
-  installPhase = ''
-    export DFX_INSTALL_ROOT=$out/bin
-    mkdir -p $DFX_INSTALL_ROOT
-    sed -i 's/if ! confirm_license; then/if false; then/' ${src}
-    export SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
-    export HOME=$PWD
-    DFX_VERSION=${version} bash ${src}
-  '';
-};
-
 shell = pkgs.mkShell {
-  buildInputs = [ keysmith quill candid idl2json dfx ];
+  buildInputs = [ keysmith quill candid idl2json ];
 };
 
 }
