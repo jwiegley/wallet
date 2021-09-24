@@ -36,14 +36,14 @@ keysmith = with pkgs; buildGoModule rec {
 
 quill = with pkgs; rustPlatform.buildRustPackage rec {
   name = "quill-${version}";
-  version = "f919b7c3";
+  version = "f1672a79";
 
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "quill";
-    rev = "f919b7c311f292a08797cc5bb172dd32fa77c925";
-    sha256 = "11lsvv2hd35n87ghdjvy4q9r12mhh1x3vjm7sbhn48lhr9gx9rq6";
-    # date = 2021-09-21T09:09:01-06:00;
+    rev = "f1672a79b483ba09f553d544eff22e829dbf57f4";
+    sha256 = "1vfl3c54kz9nri8a5fn32v4sjaql4p9nnb1dgjjk4i3i384nrsfw";
+    # date = 2021-09-22T19:45:34+02:00;
   };
   # src = ~/dfinity/master/rs/quill;
 
@@ -67,7 +67,7 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export OPENSSL_LIB_DIR=${openssl.out}/lib
   '';
 
-  cargoSha256 = "0mjz9yz6388d6rcmzfw11xb1ilsxxpsw35indnlnfr730v7m77zi";
+  cargoSha256 = "0jzc3iv1sj8rfyl6a549lhnwc0d65cqgzf69pn362gij2fbsnyks";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -78,19 +78,19 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
 
 candid = with pkgs; rustPlatform.buildRustPackage rec {
   name = "candid-${version}";
-  version = "e0e3c02b";
+  version = "81f64da5";
 
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "candid";
-    rev = "e0e3c02bbd613fb44db2ca8f142eaa14ec33ef6f";
-    sha256 = "1nrawygmxkpkqqj1q8ffqx3c6999yvlp0jx4sw7ld6j7a9brn2h8";
-    # date = 2021-09-14T07:24:46-07:00;
+    rev = "81f64da5a783658d36e5988e91e97eb8d111b153";
+    sha256 = "0rwnywvshizww6d5gzi8l907n19zr3ldal9kbh2v3ahnb9rqy151";
+    # date = 2021-09-24T14:53:27+02:00;
   };
 
   registry = "file://local-registry";
 
-  cargoSha256 = "0l6dnqh02dfi1m4mwn3v5qwr8z33i0fvm9dccbyjsygal7f3zz8y";
+  cargoSha256 = "0vramgzvp93kdxyd49fjpm5jilp48r69qpz2ma3nyajwbnqvjpj6";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
