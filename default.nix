@@ -1,5 +1,5 @@
-{ rev    ? "c74fa74867a3cce6ab8371dfc03289d9cc72a66e"
-, sha256 ? "13bnmpdmh1h6pb7pfzw5w3hm6nzkg9s1kcrwgw1gmdlhivrmnx75"
+{ rev    ? "f7ef5b19964910a06d964932f460fad94cc2e91d"
+, sha256 ? "1b7zfphix8lh393c0fpcgc8ylg8bh5xbk9rs59rf21f9w296l11c"
 , pkgs   ? import (builtins.fetchTarball {
     url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
     inherit sha256; }) {
@@ -10,42 +10,18 @@
 
 rec {
 
-keysmith = with pkgs; buildGoModule rec {
-  pname = "keysmith";
-  version = "74c20ed5";
+quill = with pkgs; rustPlatform.buildRustPackage rec {
+  name = "quill-${version}";
+  version = "0fd137b9";
 
   src = fetchFromGitHub {
     owner = "dfinity";
-    repo = "keysmith";
-    rev = "74c20ed5a8ae44214cb12abbfbe8f5887e2a4c33";
-    sha256 = "1mvqn2ir5nq5bh1h1aqjsv429m9gcfgky6mij5qnnjivp7i575mi";
-    # date = 2021-08-18T23:50:20+02:00;
+    repo = "quill";
+    rev = "7f1bfa4cd637347df7922d4c3211981faa3cac99";
+    sha256 = "1627i4p0qvz50hn6j9m17ic9wvlqmsd2vg62gqnzv69kkch0jzq0";
+    # date = 2021-12-17T16:36:30+01:00;
   };
-
-  vendorSha256 = "1p0r15ihmnmrybf12cycbav80sdj2dv2kry66f4hjfjn6k8zb0dc";
-  runVend = false;
-
-  meta = with lib; {
-    description = "Hierarchical Deterministic Key Derivation for the Internet Computer";
-    homepage = "https://github.com/dfinity/keysmith";
-    license = licenses.mit;
-    maintainers = with maintainers; [ imalison ];
-    platforms = platforms.all;
-  };
-};
-
-quill = with pkgs; rustPlatform.buildRustPackage rec {
-  name = "quill-${version}";
-  version = "f1672a79";
-
-  # src = fetchFromGitHub {
-  #   owner = "dfinity";
-  #   repo = "quill";
-  #   rev = "f1672a79b483ba09f553d544eff22e829dbf57f4";
-  #   sha256 = "1vfl3c54kz9nri8a5fn32v4sjaql4p9nnb1dgjjk4i3i384nrsfw";
-  #   # date = 2021-09-22T19:45:34+02:00;
-  # };
-  src = ~/dfinity/master/rs/quill;
+  # src = ~/dfinity/master/rs/quill;
 
   ic = fetchFromGitHub {
     owner = "dfinity";
@@ -67,7 +43,7 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export OPENSSL_LIB_DIR=${openssl.out}/lib
   '';
 
-  cargoSha256 = "14cflwmf0m17c5ss04v1yq1hiill9gi3qgla5qy44l6sflmhz2i3";
+  cargoSha256 = "sha256-ZzFNy0om047a+12jQ4cQ6NXtYsvS8+s9/iuSzJCHe18=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -78,19 +54,19 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
 
 candid = with pkgs; rustPlatform.buildRustPackage rec {
   name = "candid-${version}";
-  version = "81f64da5";
+  version = "c477d01d";
 
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "candid";
-    rev = "81f64da5a783658d36e5988e91e97eb8d111b153";
-    sha256 = "0rwnywvshizww6d5gzi8l907n19zr3ldal9kbh2v3ahnb9rqy151";
-    # date = 2021-09-24T14:53:27+02:00;
+    rev = "c477d01dbea6c92e184da0f299087ae71bf2e2ec";
+    sha256 = "0mdgx73sd4jl4x7brqgms6j7072253g5zspndv8qba903bq9bnnl";
+    # date = 2021-12-13T13:42:34-08:00;
   };
 
   registry = "file://local-registry";
 
-  cargoSha256 = "0vramgzvp93kdxyd49fjpm5jilp48r69qpz2ma3nyajwbnqvjpj6";
+  cargoSha256 = "sha256-iaY235hVKyvuuISyf2+AZ27oOnMRzxxwhK/W5nzynAE=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -101,19 +77,19 @@ candid = with pkgs; rustPlatform.buildRustPackage rec {
 
 idl2json = with pkgs; rustPlatform.buildRustPackage rec {
   name = "idl2json-${version}";
-  version = "21735b9c";
+  version = "7251ed1d";
 
   src = ~/dfinity/idl2json;
   # src = fetchFromGitHub {
-  #   owner = "dfinity-lab";
+  #   owner = "dfinity";
   #   repo = "idl2json";
-  #   rev = "bcb27ac567eba7a7c14c9d70aedd3fb777af281b";
-  #   sha256 = "0i61dkzzw6c1g8ab09cpl5p3i4fkbd39zb87za7cqllyfi3iw0pm";
+  #   rev = "7251ed1da8d50cd4ae4abc5a796e308a10d9ac40";
+  #   sha256 = "1hxrgcdi0cm6wisna425l7zn50g5q7yb6wqjgr0wks1yjc6kfzn0";
   # };
 
   registry = "file://local-registry";
 
-  cargoSha256 = "1j9gvzcm0wmifv89lyga5x10cq0v3vrwr9dpr0713vx1x3fijks4";
+  cargoSha256 = "1sjndk2dh9ka0qky1y06bwzsafrw21pqaqwbh2cv660fayx0lq18";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -122,8 +98,32 @@ idl2json = with pkgs; rustPlatform.buildRustPackage rec {
        ];
 };
 
+# dfx = pkgs.stdenv.mkDerivation rec {
+#   name = "dfx-${version}";
+#   version = "0.8.2";
+
+#   src = pkgs.fetchurl {
+#     url = "https://sdk.dfinity.org/install.sh";
+#     sha256 = "0yqxhmrri4wnfcn9d6fxw9ykf09wcfsmnjyvla9jgkzxfxbw04fd";
+#     # date = 2021-10-04T10:36:14-0700;
+#   };
+
+#   buildInputs = with pkgs; [ curl cacert ];
+
+#   phases = [ "fixupPhase" "installPhase" ];
+
+#   installPhase = ''
+#     export DFX_INSTALL_ROOT=$out/bin
+#     mkdir -p $DFX_INSTALL_ROOT
+#     sed -i 's/if ! confirm_license; then/if false; then/' ${src}
+#     export SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
+#     export HOME=$PWD
+#     DFX_VERSION=${version} bash ${src}
+#   '';
+# };
+
 shell = pkgs.mkShell {
-  buildInputs = [ keysmith quill candid idl2json ];
+  buildInputs = [ quill candid idl2json ];
 };
 
 }
