@@ -17,8 +17,8 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "quill";
-    rev = "7f1bfa4cd637347df7922d4c3211981faa3cac99";
-    sha256 = "1627i4p0qvz50hn6j9m17ic9wvlqmsd2vg62gqnzv69kkch0jzq0";
+    rev = "b41a4e8b86f011cdc6ba2950f7b4b71e9ddbe92a";
+    sha256 = "sha256-7dlg8v/wYn1Bd9qTFLMvs/XqDVOF1Z4bAbUd18S1hPI=";
     # date = 2021-12-17T16:36:30+01:00;
   };
   # src = ~/dfinity/master/rs/quill;
@@ -43,7 +43,7 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export OPENSSL_LIB_DIR=${openssl.out}/lib
   '';
 
-  cargoSha256 = "sha256-ZzFNy0om047a+12jQ4cQ6NXtYsvS8+s9/iuSzJCHe18=";
+  cargoSha256 = "sha256-6AlTytxj8sb/8epvEPuF9S4v2V7XOiQKRCutupxTa9A=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
