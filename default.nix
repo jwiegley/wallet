@@ -12,16 +12,16 @@ rec {
 
 quill = with pkgs; rustPlatform.buildRustPackage rec {
   name = "quill-${version}";
-  version = "0fd137b9";
+  version = "310d7d65";
 
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "quill";
-    rev = "b41a4e8b86f011cdc6ba2950f7b4b71e9ddbe92a";
-    sha256 = "sha256-7dlg8v/wYn1Bd9qTFLMvs/XqDVOF1Z4bAbUd18S1hPI=";
-    # date = 2021-12-17T16:36:30+01:00;
+    rev = "0d9fa88c5edd8d8a4f27ddb34643ec1aa4c8033c";
+    sha256 = "13vfnshrzsd3y87dqqb6fsr9ayc7spq3gvp4afgc6dcxndmb5vzb";
+    # date = 2022-02-25T09:44:16-08:00;
   };
-  # src = ~/dfinity/master/rs/quill;
+  # src = ~/dfinity/quill;
 
   ic = fetchFromGitHub {
     owner = "dfinity";
@@ -43,7 +43,7 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export OPENSSL_LIB_DIR=${openssl.out}/lib
   '';
 
-  cargoSha256 = "sha256-6AlTytxj8sb/8epvEPuF9S4v2V7XOiQKRCutupxTa9A=";
+  cargoSha256 = "sha256-6mhhLlwpn5CiUVXw8oG0KwoA43bjcwMYgj9WY95FMag=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -98,32 +98,32 @@ idl2json = with pkgs; rustPlatform.buildRustPackage rec {
        ];
 };
 
-# dfx = pkgs.stdenv.mkDerivation rec {
-#   name = "dfx-${version}";
-#   version = "0.8.2";
+dfx = pkgs.stdenv.mkDerivation rec {
+  name = "dfx-${version}";
+  version = "0.9.3";
 
-#   src = pkgs.fetchurl {
-#     url = "https://sdk.dfinity.org/install.sh";
-#     sha256 = "0yqxhmrri4wnfcn9d6fxw9ykf09wcfsmnjyvla9jgkzxfxbw04fd";
-#     # date = 2021-10-04T10:36:14-0700;
-#   };
+  src = pkgs.fetchurl {
+    url = "https://sdk.dfinity.org/install.sh";
+    sha256 = "19y3aiwlxnln3zv6j8l9gy21fsyj2nnqk19kir5j5iqjr624gyjv";
+    # date = 2022-03-23T14:46:44-0700;
+  };
 
-#   buildInputs = with pkgs; [ curl cacert ];
+  buildInputs = with pkgs; [ curl cacert ];
 
-#   phases = [ "fixupPhase" "installPhase" ];
+  phases = [ "fixupPhase" "installPhase" ];
 
-#   installPhase = ''
-#     export DFX_INSTALL_ROOT=$out/bin
-#     mkdir -p $DFX_INSTALL_ROOT
-#     sed -i 's/if ! confirm_license; then/if false; then/' ${src}
-#     export SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
-#     export HOME=$PWD
-#     DFX_VERSION=${version} bash ${src}
-#   '';
-# };
+  installPhase = ''
+    export DFX_INSTALL_ROOT=$out/bin
+    mkdir -p $DFX_INSTALL_ROOT
+    sed -i 's/if ! confirm_license; then/if false; then/' ${src}
+    export SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
+    export HOME=$PWD
+    DFX_VERSION=${version} bash ${src}
+  '';
+};
 
 shell = pkgs.mkShell {
-  buildInputs = [ quill candid idl2json ];
+  buildInputs = [ quill candid idl2json dfx ];
 };
 
 }
