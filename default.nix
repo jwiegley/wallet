@@ -104,11 +104,11 @@ dfx = pkgs.stdenv.mkDerivation rec {
 
   src = pkgs.fetchurl {
     url = "https://sdk.dfinity.org/install.sh";
-    sha256 = "19y3aiwlxnln3zv6j8l9gy21fsyj2nnqk19kir5j5iqjr624gyjv";
-    # date = 2022-03-23T14:46:44-0700;
+    sha256 = "0k10kl6g8hh44mcc9a5n0s4qjhiv2hzcjdmn6x0agmvpadh6y49d";
+    # date = 2022-04-26T12:22:22-0700;
   };
 
-  buildInputs = with pkgs; [ curl cacert ];
+  buildInputs = with pkgs; [ curl cacert perl ];
 
   phases = [ "fixupPhase" "installPhase" ];
 
