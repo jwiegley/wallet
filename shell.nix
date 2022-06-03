@@ -1,1 +1,1 @@
-{ ... }: (import ./default.nix {}).shell
+args@{ pkgs ? null }: (import ./default.nix args).shell

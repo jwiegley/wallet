@@ -1,5 +1,5 @@
-{ rev    ? "f7ef5b19964910a06d964932f460fad94cc2e91d"
-, sha256 ? "1b7zfphix8lh393c0fpcgc8ylg8bh5xbk9rs59rf21f9w296l11c"
+{ rev    ? "41cc1d5d9584103be4108c1815c350e07c807036"
+, sha256 ? "1zwbkijhgb8a5wzsm1dya1a4y79bz6di5h49gcmw6klai84xxisv"
 , pkgs   ? import (builtins.fetchTarball {
     url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
     inherit sha256; }) {
@@ -12,16 +12,15 @@ rec {
 
 quill = with pkgs; rustPlatform.buildRustPackage rec {
   name = "quill-${version}";
-  version = "310d7d65";
+  version = "4dc3883f";
 
   src = fetchFromGitHub {
     owner = "dfinity";
     repo = "quill";
-    rev = "0d9fa88c5edd8d8a4f27ddb34643ec1aa4c8033c";
-    sha256 = "13vfnshrzsd3y87dqqb6fsr9ayc7spq3gvp4afgc6dcxndmb5vzb";
+    rev = "4dc3883fb1f07b6a16c0f3e44bdb5d844160fedd";
+    sha256 = "1kg7l6lp4rcbvyrp6cx7a3h05w5xr9v7k9x91bkrigj1q8xxfm0z";
     # date = 2022-02-25T09:44:16-08:00;
   };
-  # src = ~/dfinity/quill;
 
   ic = fetchFromGitHub {
     owner = "dfinity";
@@ -43,7 +42,7 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export OPENSSL_LIB_DIR=${openssl.out}/lib
   '';
 
-  cargoSha256 = "sha256-6mhhLlwpn5CiUVXw8oG0KwoA43bjcwMYgj9WY95FMag=";
+  cargoSha256 = "sha256-kWVLhBadn8ZtZH9kbrfvzjcX5Kf3F+xQ0LgrZb0AFKU=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl protobuf ]
@@ -79,7 +78,7 @@ idl2json = with pkgs; rustPlatform.buildRustPackage rec {
   name = "idl2json-${version}";
   version = "7251ed1d";
 
-  src = ~/dfinity/idl2json;
+  src = ~/src/icp/idl2json;
   # src = fetchFromGitHub {
   #   owner = "dfinity";
   #   repo = "idl2json";
@@ -100,12 +99,12 @@ idl2json = with pkgs; rustPlatform.buildRustPackage rec {
 
 dfx = pkgs.stdenv.mkDerivation rec {
   name = "dfx-${version}";
-  version = "0.9.3";
+  version = "0.10.0";
 
   src = pkgs.fetchurl {
     url = "https://sdk.dfinity.org/install.sh";
-    sha256 = "0k10kl6g8hh44mcc9a5n0s4qjhiv2hzcjdmn6x0agmvpadh6y49d";
-    # date = 2022-04-26T12:22:22-0700;
+    sha256 = "08dwc9v5dzhs4n4spc1hdybs963qv5930v3nvsjfvz5hy0fi9951";
+    # date = 2022-06-03T10:05:05-0700;
   };
 
   buildInputs = with pkgs; [ curl cacert perl ];
