@@ -40,6 +40,8 @@ quill = with pkgs; rustPlatform.buildRustPackage rec {
     export PROTOC=${protobuf}/bin/protoc
     export OPENSSL_DIR=${openssl.dev}
     export OPENSSL_LIB_DIR=${openssl.out}/lib
+
+    export PROTOC=${protobuf}/bin/protoc
   '';
 
   cargoSha256 = "sha256-kWVLhBadn8ZtZH9kbrfvzjcX5Kf3F+xQ0LgrZb0AFKU=";
